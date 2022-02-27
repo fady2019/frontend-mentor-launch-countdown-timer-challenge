@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@700&display=swap');
+
+:root {
+  --white: hsl(0, 0%, 100%);
+  --soft-red: hsl(345, 95%, 68%);
+  --grayish-blue: hsl(237, 18%, 59%);
+  --dark-blue: hsl(235, 16%, 14%);
+  --blackish-blue: hsl(234, 17%, 12%);
+  --dark-desaturated-blue: hsl(236, 21%, 26%);
+}
+
+html,
+body {
+  font-family: 'Red Hat Text';
+
+  overflow: hidden;
+
+  width: 100vw;
+  height: 100vh;
+
+  margin: 0;
+  border: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body {
+  background: url('./images/pattern-hills.svg') no-repeat bottom,
+    url('./images/bg-stars.svg') no-repeat, var(--dark-blue);
+
+  font-size: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.container {
+  overflow: hidden;
+  overflow-y: auto;
+  height: calc(100% - 150px);
+  padding: 100px 0 50px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.title {
+  text-align: center;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 8px;
+}
+
+.boxes-container {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.box-container {
+  margin: 10px 0;
+}
+
+.box-container .label {
+  display: block;
+  margin-top: 25px;
+  color: var(--grayish-blue);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.box {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--blackish-blue);
+  box-shadow: 0 12px 0 0 var(--blackish-blue);
+  width: 200px;
+  height: 180px;
+  border-radius: 8px;
+  margin: 0 25px;
+  perspective: 1000px;
+}
+
+.box .before,
+.box .after {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  z-index: 0;
+}
+
+.box .before {
+  top: 0;
+}
+
+.box .after {
+  bottom: 0;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  z-index: 1;
+  transform-style: preserve-3d;
+  transform-origin: bottom;
+  transform: rotateX(0);
+}
+
+.card.flipped {
+  transform: rotateX(-180deg);
+  transition: transform 0.6s linear;
+}
+
+.card .card-face {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-face-back {
+  transform: rotateX(-180deg);
+}
+
+.box .before,
+.box .after,
+.card-face {
+  background-color: var(--dark-desaturated-blue);
+}
+
+.face-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.face-content .digits {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 5rem;
+  line-height: 0;
+  color: var(--soft-red);
+  display: flex;
+  justify-content: center;
+}
+
+.card-face-front .face-content .digits,
+.before .face-content .digits {
+  align-items: flex-end;
+}
+
+.after .face-content .digits,
+.card-face-back .face-content .digits {
+  align-items: flex-start;
+}
+
+.box .before .face-content::before,
+.card-face-front .face-content::before,
+.box .after .face-content::before,
+.card-face-back .face-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.box .before .face-content::before,
+.card-face-front .face-content::before {
+  background: rgb(8 8 8 / 15%);
+  border-bottom: 1px solid rgb(8 8 8 / 10%);
+}
+
+.box .after .face-content::before,
+.card-face-back .face-content::before {
+  border-top: 1px solid rgb(8 8 8 / 10%);
+}
+
+.hinge {
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--blackish-blue);
+  border-radius: 50%;
+}
+
+.left-hinge {
+  left: -5px;
+}
+
+.right-hinge {
+  right: -5px;
+}
+
+.card-face-front .hinge,
+.before .hinge {
+  bottom: -5px;
+}
+
+.card-face-back .hinge,
+.after .hinge {
+  top: -5px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+footer .icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--grayish-blue);
+  margin: 5px 10px;
+  cursor: pointer;
+}
+
+footer .facebook-icon {
+  -webkit-mask: url(./images/icon-facebook.svg) no-repeat center;
+  mask: url(./images/icon-facebook.svg) no-repeat center;
+}
+
+footer .pinterest-icon {
+  -webkit-mask: url(./images/icon-pinterest.svg) no-repeat center;
+  mask: url(./images/icon-pinterest.svg) no-repeat center;
+}
+
+footer .instagram-icon {
+  -webkit-mask: url(./images/icon-instagram.svg) no-repeat center;
+  mask: url(./images/icon-instagram.svg) no-repeat center;
+}
+
+footer .icon:hover {
+  background-color: var(--soft-red);
+}
